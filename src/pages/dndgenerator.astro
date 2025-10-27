@@ -1,11 +1,16 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
 export const prerender = false;
 
-const workerUrl = "https://dnditemgenerator.robertmaiorana.workers.dev";
-const response = await fetch(workerUrl);
-const data = await response.text();
+const platform = Astro.locals.runtime;
 ---
 
-<div set:html={data} />
----
+<html>
+<head>
+  <title>DND Generator</title>
+</head>
+<body>
+  <iframe src="https://bagofholding.robertmaiorana.workers.dev" 
+          style="width:100%; height:100vh; border:none;">
+  </iframe>
+</body>
+</html>
