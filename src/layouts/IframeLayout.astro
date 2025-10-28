@@ -1,0 +1,124 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	pubDate?: Date;
+	updatedDate?: Date;
+	iframeUrl: string;
+	iframeHeight?: string;
+}
+
+const { title, description, pubDate, updatedDate, iframeUrl, iframeHeight = '100vh' } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: 100%;
+				max-width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			.iframe-header {
+				width: 100%;
+				max-width: 1400px;
+				margin: 0 auto;
+				padding: 1.5em 2em;
+				text-align: center;
+			}
+			.iframe-header h1 {
+				margin: 0 0 0.5em 0;
+				font-size: 2.5em;
+				line-height: 1.2;
+			}
+			.iframe-header .description {
+				color: rgb(var(--gray));
+				font-size: 1.1em;
+				margin-bottom: 1em;
+			}
+			.date {
+				margin-top: 0.5em;
+				color: rgb(var(--gray));
+				font-size: 0.9em;
+			}
+			.last-updated-on {
+				font-style: italic;
+			}
+			.iframe-container {
+				width: 100%;
+				max-width: 100%;
+				margin: 0;
+				padding: 0;
+				position: relative;
+			}
+			.iframe-wrapper {
+				width: 100%;
+				height: var(--iframe-height, 100vh);
+				min-height: 600px;
+				border: none;
+				background: #fff;
+			}
+			iframe {
+				width: 100%;
+				height: 100%;
+				border: none;
+				display: block;
+			}
+			/* Optional: Add a subtle border/shadow to the iframe */
+			.iframe-container.with-border iframe {
+				border-top: 1px solid rgb(var(--gray-light));
+				box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.05);
+			}
+			@media (max-width: 768px) {
+				.iframe-header {
+					padding: 1em 1em;
+				}
+				.iframe-header h1 {
+					font-size: 1.8em;
+				}
+				.iframe-wrapper {
+					min-height: 500px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="iframe-header">
+				<h1>{title}</h1>
+				{description && <p class="description">{description}</p>}
+				{pubDate && (
+					<div class="date">
+						<FormattedDate date={pubDate} />
+						{updatedDate && (
+							<div class="last-updated-on">
+								Last updated on <FormattedDate date={updatedDate} />
+							</div>
+						)}
+					</div>
+				)}
+			</div>
+			<div class="iframe-container">
+				<div class="iframe-wrapper" style={`--iframe-height: ${iframeHeight}`}>
+					<iframe 
+						src={iframeUrl}
+						title={title}
+						loading="lazy"
+						sandbox="allow-scripts allow-same-origin allow-forms"
+					></iframe>
+				</div>
+			</div>
+			<!-- Optional slot for additional content below iframe -->
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>
