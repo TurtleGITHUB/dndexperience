@@ -1,26 +1,11 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import IframeLayout from '../layouts/IframeLayout.astro';
 ---
-<Layout
-	title="DND Generator"
-	description="DND Generator"
-	pubDate={new Date('August 08 2021')}
->
-  <style>
-    .iframe-container {
-      width: 100%;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-    }
-    .iframe-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-  </style>
-  
-  <div class="iframe-container">
-    <iframe src="https://bagofholding.robertmaiorana.workers.dev/"></iframe>
-  </div>
-</Layout>
+
+<IframeLayout
+	title="Druid Character Sheet"
+	description="A comprehensive digital character sheet designed specifically for D&D 5e Druids. Track your Wild Shape forms, spell slots, and druid abilities."
+	iframeUrl="https://dnddruidsheet.robertmaiorana.workers.dev"
+	iframeHeight="calc(100vh - 180px)"
+	pubDate={new Date('2021-08-08')}
+/>
