@@ -11,7 +11,7 @@ import { SITE_TITLE } from '../consts';
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 			<div class="dropdown">
-				<button class="dropbtn">DND Tools</button>
+				<button class="dropbtn">DND Tools ▾</button>
 				<div class="dropdown-content">
 					<HeaderLink href="/dndgenerator">Dnd Generator</HeaderLink>
 					<HeaderLink href="/foundry">DND World</HeaderLink>
@@ -113,7 +113,9 @@ import { SITE_TITLE } from '../consts';
 		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 		z-index: 1;
 		border-radius: 4px;
-		margin-top: 4px;
+		top: 100%;
+		left: 0;
+		padding-top: 0;
 	}
 
 	.dropdown-content :global(a) {
